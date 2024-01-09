@@ -13,14 +13,23 @@ On Ethereum (tested on goerli and hardhat local network), I can stake and unstak
 
 ## Tests
 
-Test runs on hardhat local network:
+### Test runs on hardhat local network
 
 ```
 npx hardhat test --network hardhat
 
 ```
 
-Test fails on vechain:
+### Test fails on vechain
+
+Spin up thor solo local network with docker:
+
+```
+docker compose up -d
+
+```
+
+Run tests:
 
 ```
 npx hardhat test
