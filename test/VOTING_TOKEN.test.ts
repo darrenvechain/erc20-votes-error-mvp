@@ -14,31 +14,31 @@ describe.only("VOTING_TOKEN", function () {
     console.log("otherAccount", otherAccount.address);
 
     // Deploy TOKEN
-    const B3trContract = await ethers.getContractFactory("TOKEN")
-    const token = await B3trContract.deploy(minterAccount)
+    const TokenContract = await ethers.getContractFactory("TOKEN")
+    const token = await TokenContract.deploy(minterAccount)
     await token.waitForDeployment()
     console.log("token", await token.getAddress());
 
     // Deploy VOTING_TOKEN
-    const Vot3Contract = await ethers.getContractFactory("VOTING_TOKEN")
-    const votingToken = await Vot3Contract.deploy(await token.getAddress())
+    const VotingTokenContract = await ethers.getContractFactory("VOTING_TOKEN")
+    const votingToken = await VotingTokenContract.deploy(await token.getAddress())
     await votingToken.waitForDeployment()
     console.log("votingToken", await votingToken.getAddress());
 
-    return { B3trContract, token, votingToken, owner, otherAccount, minterAccount, otherAccounts }
+    return { TokenContract, token, votingToken, owner, otherAccount, minterAccount, otherAccounts }
   }
 
   describe("Unlock TOKEN", function () {
     it.only("should burn VOTING_TOKEN and unlock TOKEN", async function () {
       const { token, votingToken, minterAccount, otherAccount, owner } = await deploy()
-      const vot3Address = await votingToken.getAddress()
+      const VotingTokenAddress = await votingToken.getAddress()
       let tx
 
       // Mint some TOKEN
       await expect(token.connect(minterAccount).mint(otherAccount, ethers.parseEther("1000"))).not.to.be.reverted
 
       // Approve VOTING_TOKEN to spend TOKEN on behalf of otherAccount. N.B. this is an important step and could be included in a multi clause transaction
-      await expect(token.connect(otherAccount).approve(vot3Address, ethers.parseEther("9"))).not.to.be.reverted
+      await expect(token.connect(otherAccount).approve(VotingTokenAddress, ethers.parseEther("9"))).not.to.be.reverted
 
       // Lock TOKEN to get VOTING_TOKEN
       tx = await votingToken.connect(otherAccount).stake(ethers.parseEther("9"))

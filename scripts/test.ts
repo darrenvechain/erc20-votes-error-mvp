@@ -1,10 +1,10 @@
-import { deployB3trToken, deployVot3Token } from "./deploy";
+import { deployTokenToken, deployVotingTokenToken } from "./deploy";
 import Connex from '@vechain/connex'
 
 async function main() {
     // deploy the contracts
-    const token = await deployB3trToken()
-    const votingToken = await deployVot3Token(await token.getAddress())
+    const token = await deployTokenToken()
+    const votingToken = await deployVotingTokenToken(await token.getAddress())
 
     // instantiate thor for solo network
     const thor = new Connex.Thor({

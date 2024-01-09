@@ -40,7 +40,10 @@ contract VOTING_TOKEN is ERC20, ERC20Permit, ERC20Votes, AccessControl {
     }
 
     function unstake(uint256 amount) external {
-        require(balanceOf(msg.sender) >= amount, "Insufficient Vot3 Tokens");
+        require(
+            balanceOf(msg.sender) >= amount,
+            "Insufficient VotingToken Tokens"
+        );
         _burn(msg.sender, amount);
         require(token.transfer(msg.sender, amount), "Transfer failed");
     }
