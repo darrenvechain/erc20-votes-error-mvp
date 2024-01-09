@@ -1,8 +1,6 @@
 import { ethers } from "hardhat"
 import { expect } from "chai"
 
-const minterMetamask = "0x0E1DbabfeB875E76C3a365174bcc06ae7286Be31"
-
 describe.only("VOTING_TOKEN", function () {
   const deploy = async () => {
     // Contracts are deployed using the first signer/account by default

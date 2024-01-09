@@ -1,4 +1,4 @@
-## OVERVIEW
+### Contracts
 
 There are two contracts:
 
@@ -7,11 +7,11 @@ There are two contracts:
 
 To obtain the VOTING_TOKEN a user must first mint TOKEN, then call the `stake` function of the VOTING_TOKEN to swap TOKEN with VOTING_TOKEN at a 1:1 ratio. To get TOKEN back, the user must call the `unstake` function of the VOTING_TOKEN.
 
-## PROBLEM
+## Issue
 
 On Ethereum (tested on goerli and hardhat local network), I can stake and unstake in the following block without any problems. On vechain instead I need to wait at least 10 seconds from the previous operation otherwise the unstake fails and the transaction reverts.
 
-## STEPS TO REPRODUCE
+## Tests
 
 Test runs on hardhat local network:
 
